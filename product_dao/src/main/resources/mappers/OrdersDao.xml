@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhp.dao.OrdersDao">
+    <resultMap id="ordersResultMap" type="com.lhp.domain.Orders">
+        <association property="product" column="PRODUCTID" select="com.lhp.dao.ProductDao.findById" javaType="com.lhp.domain.Product"></association>
+        <association property="member" column="MEMBERID" select="com.lhp.dao.MemberDao.findMemberById" javaType="com.lhp.domain.Member"></association>
+        <collection property="travellers" column="ID" select="com.lhp.dao.TravellerDao.findTravellerById"></collection>
+    </resultMap>
+
+    <resultMap id="ordersResult" type="com.lhp.domain.Orders">
+        <association property="product" column="PRODUCTID" select="com.lhp.dao.ProductDao.findById" javaType="com.lhp.domain.Product"></association>
+    </resultMap>
+
+    <select id="findAll" resultMap="ordersResult">
+        SELECT * FROM orders
+    </select>
+    <select id="findById" resultMap="ordersResultMap">
+        SELECT * FROM orders where id=#{id}
+    </select>
+
+</mapper>

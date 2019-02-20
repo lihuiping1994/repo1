@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhp.dao.TravellerDao">
+
+    <select id="findTravellerById" resultType="com.lhp.domain.Traveller" parameterType="string">
+        select * from traveller where id in (select TRAVELLERID from ORDER_TRAVELLER WHERE ORDERID=#{id})
+    </select>
+
+</mapper>
